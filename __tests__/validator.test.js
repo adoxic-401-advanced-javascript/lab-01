@@ -2,22 +2,27 @@ const validator = require('../lib/validator.js');
 
 describe('validator module', () => {
   
-  const str = 'yes';
+  const str = 'banana';
   const num = 1;
   const arr = ['a'];
   const obj = { x: 'y' };
   const func = () => {};
   const bool = false;
+  const date = 'Tue Sep 17 2019 16:35:31 GMT-0700 (Pacific Daylight Time)';
+  const strNum = '77';
+  const strBool = 'true';
 
   describe('performs basic validation of', () => {
 
     test('strings', () => {
       expect(validator.isString(str)).toBeTruthy();
-      expect(validator.isString(num)).toBeFalsy();
+      expect(validator.isString(num)).toBeTruthy();
       expect(validator.isString(arr)).toBeFalsy();
       expect(validator.isString(obj)).toBeFalsy();
       expect(validator.isString(func)).toBeFalsy();
-      expect(validator.isString(bool)).toBeFalsy();
+      expect(validator.isString(bool)).toBeTruthy();
+      expect(validator.isString(strNum)).toBeTruthy();
+      expect(validator.isString(strBool)).toBeTruthy();
     });
 
     test('numbers', () => {
@@ -27,6 +32,8 @@ describe('validator module', () => {
       expect(validator.isNumber(obj)).toBeFalsy();
       expect(validator.isNumber(func)).toBeFalsy();
       expect(validator.isNumber(bool)).toBeFalsy();
+      expect(validator.isNumber(strNum)).toBeTruthy();
+      expect(validator.isNumber(strBool)).toBeFalsy();
     });
 
     test('arrays', () => {
@@ -54,6 +61,8 @@ describe('validator module', () => {
       expect(validator.isBoolean(obj)).toBeFalsy();
       expect(validator.isBoolean(func)).toBeFalsy();
       expect(validator.isBoolean(bool)).toBeTruthy();
+      expect(validator.isBoolean(strNum)).toBeFalsy();
+      expect(validator.isBoolean(strBool)).toBeTruthy();
     });
 
     test('functions', () => {
@@ -143,6 +152,46 @@ describe('validator module', () => {
 
     test('array of booleans', () => {
       expect(validator.getValidator(['Booleans'])).toBe(validator.isArrayOfBooleans);
+    });
+
+  });
+  describe('get errors', () => {
+
+    test('strings error', () => {
+      expect(validator.getCastor(str, 'String')).toBeTruthy();
+      expect(validator.getCastor(num, 'String')).toBeTruthy();
+      expect(validator.getCastor(arr, 'String')).toBe(`I'm sorry I'm not sure that is a String`);
+      expect(validator.getCastor(obj, 'String')).toBe(`I'm sorry I'm not sure that is a String`);
+      expect(validator.getCastor(func, 'String')).toBe(`I'm sorry I'm not sure that is a String`);
+      expect(validator.getCastor(bool, 'String')).toBeTruthy();
+    });
+
+    test('num error', () => {
+      expect(validator.getCastor(str, 'Number')).toBe(`I'm sorry I'm not sure that is a Number`);
+      expect(validator.getCastor(num, 'Number')).toBeTruthy();
+      expect(validator.getCastor(arr, 'Number')).toBe(`I'm sorry I'm not sure that is a Number`);
+      expect(validator.getCastor(obj, 'Number')).toBe(`I'm sorry I'm not sure that is a Number`);
+      expect(validator.getCastor(func, 'Number')).toBe(`I'm sorry I'm not sure that is a Number`);
+      expect(validator.getCastor(bool, 'Number')).toBe(`I'm sorry I'm not sure that is a Number`);
+    });
+
+    test('bool error', () => {
+      expect(validator.getCastor(str, 'Boolean')).toBe(`I'm sorry I'm not sure that is a Boolean`);
+      expect(validator.getCastor(num, 'Boolean')).toBe(`I'm sorry I'm not sure that is a Boolean`);
+      expect(validator.getCastor(arr, 'Boolean')).toBe(`I'm sorry I'm not sure that is a Boolean`);
+      expect(validator.getCastor(obj, 'Boolean')).toBe(`I'm sorry I'm not sure that is a Boolean`);
+      expect(validator.getCastor(func, 'Boolean')).toBe(`I'm sorry I'm not sure that is a Boolean`);
+      expect(validator.getCastor(bool, 'Boolean')).toBeTruthy();
+    });
+
+    test('date error', () => {
+      expect(validator.getCastor(str, 'Date')).toBe(`I'm sorry I'm not sure that is a Date`);
+      expect(validator.getCastor(num, 'Date')).toBe(`I'm sorry I'm not sure that is a Date`);
+      expect(validator.getCastor(arr, 'Date')).toBe(`I'm sorry I'm not sure that is a Date`);
+      expect(validator.getCastor(obj, 'Date')).toBe(`I'm sorry I'm not sure that is a Date`);
+      expect(validator.getCastor(func, 'Date')).toBe(`I'm sorry I'm not sure that is a Date`);
+      expect(validator.getCastor(bool, 'Date')).toBe(`I'm sorry I'm not sure that is a Date`);
+      expect(validator.getCastor(date, 'Date')).toBeTruthy();
     });
 
   });
