@@ -1,4 +1,5 @@
+const DocumentCollection = require('./lib/document-collection');
 
-const validator = require('./lib/validator.js');
+const documents = new DocumentCollection(/* path to use */);
 
-console.log(validator.isString('hello world'));
+// write some code to exercise your document collection
