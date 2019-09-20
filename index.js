@@ -1,4 +1,21 @@
+const DocumentCollection = require('./lib/document-collection');
 
-const validator = require('./lib/validator.js');
+const path = './test-data';
+const documents = new DocumentCollection(path);
 
-console.log(validator.isString('hello world'));
+const testObj = {
+  key: 'ture',
+  slf: 33,
+  element: true
+};
+
+documents.save(testObj)
+  .then(res => {
+    console.log('saved', res);
+    documents.getAll()
+      .then(res => {
+        console.log('read', res);
+      });
+  });
+
+
