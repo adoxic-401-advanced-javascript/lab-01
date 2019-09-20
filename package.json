@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^6.1.0"
+    "eslint": "^6.1.0",
+    "sf": "^0.2.0",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "jest": "^24.9.0"
