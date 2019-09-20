@@ -84,6 +84,7 @@ describe('Document Collection', () => {
     return documentCollection.getAll()
       .then(res => {
         expect(readdir.mock.calls[0][0]).toBe(folder);
+        expect(res).toBeTruthy();
       });
   });
 });
