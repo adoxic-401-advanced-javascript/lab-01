@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "eslint": "^6.1.0",
+    "mkdirp": "^0.5.1",
     "sf": "^0.2.0",
     "shortid": "^2.2.15"
   },
