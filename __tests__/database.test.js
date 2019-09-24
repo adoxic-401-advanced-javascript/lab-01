@@ -6,7 +6,7 @@ jest.mock('../lib/files', () => {
 
 const Database = require('../lib/database');
 const DocumentCollection = require('../lib/document-collection');
-
+const Schema = require('../lib/Schema');
 // for setting up mock expectations
 const { mkdirp } = require('../lib/files');
 
@@ -14,6 +14,9 @@ const { mkdirp } = require('../lib/files');
 describe('Database', () => {
 
   const dbPath = './dbpath';
+  it('scheme', () => {
+    expect(Schema).toBe(Schema);
+  });
 
   it('connect sets connection promise', () => {
     // arrange
